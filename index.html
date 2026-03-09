@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prediBuild – Coordinación BIM</title>
+
+  <!-- Google Fonts: Sora -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NAVBAR — Barra de navegación fija en la parte superior
+       Contiene: logo, links de navegación, botones CTA
+  ════════════════════════════════════════════════════════════ -->
+  <header class="nav">
+    <div class="nav__inner">
+
+      <!-- Logo: imagen SVG + texto -->
+      <a href="/" class="nav__logo">
+        <img src="assets/images/logo/PrediBuild-02.svg" alt="prediBuild" class="nav__logo-img" />
+        predi<strong>Build</strong>
+      </a>
+
+      <!-- Links de navegación centrados -->
+      <nav class="nav__links">
+        <a href="#soluciones">Soluciones</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#nosotros">Nosotros</a>
+      </nav>
+
+      <!-- Botones de acción a la derecha -->
+      <!-- <div class="nav__cta">
+        <a href="#login" class="btn btn--ghost">Iniciar sesión</a>
+        <a href="#demo" class="btn btn--primary">Agendar Demo</a>
+      </div>
+ -->
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO — Sección principal de bienvenida
+       Contiene: título principal, subtítulo, botón CTA
+  ════════════════════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__inner">
+
+      <!-- Título: la palabra "antes" resaltada en azul -->
+      <h1>Soluciona los problemas<br/><em>antes</em> de que existan.</h1>
+
+      <!-- Subtítulo descriptivo -->
+      <p>Detecta problemas críticos, rastrea y resuelve incidencias —<br/>todo antes de ejecutar tu proyecto.</p>
+
+      <!-- Botones de acción -->
+      <div class="hero__actions">
+        <a href="#como-funciona" class="btn btn--outline btn--lg">Ver cómo funciona →</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FEATURES — Tarjetas de características del servicio
+       Contiene: 3 cards con los servicios principales
+  ════════════════════════════════════════════════════════════ -->
+  <section class="features" id="soluciones">
+    <div class="container">
+
+      <!-- Encabezado de la sección -->
+      <div class="section-header">
+        <!-- <span class="badge badge--dark">Servicio</span> -->
+        <h2>¿Qué buscamos?</h2>
+        <p>Anticipar y detectar problemas inherentes al diseño antes de que ocurran.</p>
+      </div>
+
+      <!-- Grid de 3 tarjetas -->
+      <div class="features__grid">
+
+        <!-- Card 1: Control de versiones -->
+        <div class="fcard fcard--light">
+          <div class="fcard__label">Modelamiento</div>
+          <h3>Modelado BIM de todas las especialidades</h3>
+          <p>Se generan modelos precisos a partir del diseño para todas las disciplinas involucradas en el proyecto.</p>
+          <div class="fcard__tags">
+            <span>DISEÑO</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Gestión de incidencias -->
+        <div class="fcard fcard--light">
+          <div class="fcard__label">Compatibilización</div>
+          <h3>Reportes de incompatibilidades</h3>
+          <p>Durante el modelamiento se generan reportes de incompatibilidades dentro de los planos de diseño.</p>
+          <div class="fcard__tags">
+            <span>DISEÑO</span>
+            
+          </div>
+        </div>
+
+        <!-- Card 3: Reportes -->
+        <div class="fcard fcard--light">
+          <div class="fcard__label">DATA</div>
+          <h3>Generamos informacion a partir de tu proyecto</h3>
+          <p>Generamos reportes de interferencias, dashboards y análisis de datos para el desarrollo integral de tu proyecto.</p>
+          <div class="fcard__tags">
+            <span>POWERBI</span>
+            <span>NAVISWORKS</span>
+          
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       ACCORDION SECTION — Muestra funcionalidades con imagen
+       Izquierda: acordeón expandible con 3 ítems
+       Derecha: imagen que cambia según el ítem abierto
+       ⚠️ La lógica del cambio de imagen está en src/main.ts
+          Cada <details> tiene data-preview="key" que main.ts
+          usa para cargar la imagen correspondiente
+  ════════════════════════════════════════════════════════════ -->
+  <section class="accordion-section" id="como-funciona">
+    <div class="container">
+      <div class="accordion-section__inner">
+
+        <!-- IZQUIERDA: Título + ítems del acordeón -->
+        <div class="accordion-left">
+          <h2>La forma más fácil de coordinar<br/>tu proyecto BIM.</h2>
+
+          <!-- Ítem 1: abierto por defecto → muestra assets/images/previews/viewer.png -->
+          <details class="accordion-item" open data-preview="viewer">
+            <summary class="accordion-item__title">
+              Visualiza modelos IFC en el navegador
+              <span class="accordion-arrow">
+  <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</span>
+            </summary>
+            <div class="accordion-item__body">
+              <p>Carga archivos IFC directamente, navega en 3D, selecciona elementos y consulta sus propiedades sin instalar ningún software.</p>
+              <a href="#" class="accordion-link">Conoce más →</a>
+            </div>
+          </details>
+
+          <!-- Ítem 2: al abrir → muestra assets/images/previews/clash.png -->
+          <details class="accordion-item" data-preview="clash">
+            <summary class="accordion-item__title">
+              Detecta interferencias entre modelos
+              <span class="accordion-arrow">
+  <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </svg>
+</span>
+            </summary>
+            <div class="accordion-item__body">
+              <p>Ejecuta clash detection entre disciplinas, clasifica por severidad y convierte cada clash en una incidencia rastreable.</p>
+              <a href="#" class="accordion-link">Conoce más →</a>
+            </div>
+          </details>
+
+          <!-- Ítem 3: al abrir → muestra assets/images/previews/issues.png -->
+          <details class="accordion-item" data-preview="issues">
+            <summary class="accordion-item__title">
+              Gestiona incidencias con ciclo completo
+              <span class="accordion-arrow">
+                <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+                  <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </summary>
+            <div class="accordion-item__body">
+              <p>OPEN → IN REVIEW → RESOLVED → CLOSED. Asigna responsables, comenta y cierra sin salir de la plataforma.</p>
+              <a href="#" class="accordion-link">Conoce más →</a>
+            </div>
+          </details>
+
+        </div>
+
+        <!-- DERECHA: Contenedor de imagen — main.ts inyecta <img> aquí -->
+        <div class="accordion-right">
+          <div class="accordion-preview">
+            <div class="accordion-preview__body" id="accordionPreview"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CTA — Llamada a la acción final
+       Contiene: badge, título, descripción, botón de demo
+  ════════════════════════════════════════════════════════════ -->
+  <section class="cta-section" id="demo">
+    <div class="container">
+      <div class="cta-box">
+        <span class="badge">Empieza hoy</span>
+        <h2>¿Listo para coordinar<br/>sin fricciones?</h2>
+        <p>Agenda una demo personalizada y ve prediBuild en acción con tu propio modelo IFC.</p>
+        <a href="mailto:hola@predibuild.com" class="btn btn--primary btn--lg">Agendar Demo gratis</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOTER — Pie de página
+       Contiene: logo, 3 columnas de links, copyright
+  ════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+
+      <!-- Fila superior: brand + columnas -->
+      <div class="footer__top">
+
+        <!-- Brand -->
+        <div class="footer__brand">
+          <a href="/" class="nav__logo" style="margin-bottom:12px; display:inline-flex;">
+            <img src="assets/images/logo/PrediBuild-02.svg" alt="prediBuild" class="nav__logo-img" style="height:32px;" />
+            predi<strong>Build</strong>
+          </a>
+          <p>Plataforma BIM de coordinación web-nativa. Powered by Open BIM standards.</p>
+        </div>
+
+        <!-- Links: Producto -->
+        <div class="footer__col">
+          <strong>Producto</strong>
+          <a href="#">prediView</a>
+          <a href="#">prediClash</a>
+          <a href="#">prediDocs</a>
+          <a href="#">Precios</a>
+        </div>
+
+        <!-- Links: Recursos -->
+        <div class="footer__col">
+          <strong>Recursos</strong>
+          <a href="#">Documentación</a>
+          <a href="#">Blog</a>
+          <a href="#">Changelog</a>
+          <a href="#">Centro de ayuda</a>
+        </div>
+
+        <!-- Links: Empresa -->
+        <div class="footer__col">
+          <strong>Empresa</strong>
+          <a href="#">Nosotros</a>
+          <a href="#">Contacto</a>
+          <a href="#">Privacidad</a>
+          <a href="#">Términos</a>
+        </div>
+
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer__bottom">
+        <span>© 2025 prediBuild. Todos los derechos reservados.</span>
+        <span>Hecho con ♥ para la industria AEC</span>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TYPESCRIPT ENTRY POINT
+       Archivo: src/main.ts
+       Maneja: acordeón, cambio de imágenes preview, scroll navbar
+  ════════════════════════════════════════════════════════════ -->
+  <script type="module" src="/src/main.ts"></script>
+
+</body>
+</html>

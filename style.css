@@ -1,0 +1,740 @@
+/* ============================================================
+   prediBuild — Landing Page Styles
+   Font:      Sora (Google Fonts)
+   Primary:   #132a43  (navy oscuro)
+   Secondary: #5192c2  (azul acero)
+   ============================================================ */
+
+
+/* ═══════════════════════════════════════════════════════════
+   1. RESET & VARIABLES GLOBALES
+   Define los colores, tamaños y fuentes usados en todo el sitio.
+   Para cambiar un color, solo edita aquí — aplica en toda la página.
+════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Colores de marca */
+  --navy:         #132a43;   /* Azul marino oscuro — color primario */
+  --navy-lt:      #1e3d5c;   /* Variante más clara del navy */
+  --blue:         #5192c2;   /* Azul acero — color secundario */
+  --blue-dk:      #3a7ab0;   /* Azul oscuro — hover de botones */
+  --blue-lt:      #e8f1f9;   /* Azul muy claro — fondos y badges */
+
+  /* Colores de estado (para tags e indicadores) */
+  --teal:         #0d9488;
+  --teal-lt:      #ccfbf1;
+  --amber:        #d97706;
+  --amber-lt:     #fef3c7;
+  --red:          #e11d48;
+  --red-lt:       #ffe4e6;
+  --green:        #16a34a;
+
+  /* Neutros */
+  --white:        #ffffff;
+  --off-white:    #f8fafc;   /* Fondo de secciones alternas */
+  --border:       #e2e8f0;   /* Color de bordes */
+  --text:         #1e293b;   /* Texto principal */
+  --muted:        #64748b;   /* Texto secundario / subtítulos */
+  --muted-lt:     #94a3b8;   /* Texto muy tenue */
+
+  /* Tipografía */
+  --font:         'Sora', system-ui, sans-serif;
+
+  /* Layout */
+  --nav-h:        120px;     /* Altura del navbar — editar aquí para cambiarla */
+  --max-w:        1200px;    /* Ancho máximo del contenido */
+
+  /* Bordes redondeados */
+  --radius:       12px;
+  --radius-lg:    20px;
+  --radius-pill:  999px;     /* Completamente redondeado (botones, badges) */
+
+  /* Sombras */
+  --shadow:       0 4px 24px rgba(19,42,67,.10);
+  --shadow-lg:    0 12px 48px rgba(19,42,67,.15);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; }
+img { max-width: 100%; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   2. UTILIDADES GLOBALES
+   Clases reutilizables en cualquier sección
+════════════════════════════════════════════════════════════ */
+
+/* Contenedor centrado con padding lateral */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Colores de texto utilitarios */
+.text--red   { color: var(--red); }
+.text--green { color: var(--green); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   3. BADGES — Etiquetas pequeñas de categoría
+   Uso: <span class="badge">Texto</span>
+        <span class="badge badge--dark">Texto oscuro</span>
+════════════════════════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  background: var(--blue-lt);
+  color: var(--blue-dk);
+  border: 1px solid #c3d9ef;
+}
+
+/* Variante oscura para fondos claros */
+.badge--dark {
+  background: var(--navy);
+  color: rgba(255,255,255,.7);
+  border-color: transparent;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   4. BOTONES — Sistema de botones reutilizable
+   Base: .btn
+   Tamaño grande: .btn--lg
+   Variantes: .btn--primary | .btn--ghost | .btn--outline
+════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  transition: all .2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+/* Tamaño grande */
+.btn--lg {
+  padding: 14px 28px;
+  font-size: 15px;
+}
+
+/* Sin fondo — solo texto */
+.btn--ghost {
+  background: transparent;
+  color: var(--muted);
+}
+.btn--ghost:hover {
+  background: var(--off-white);
+  color: var(--navy);
+}
+
+/* Relleno azul — acción principal */
+.btn--primary {
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(81,146,194,.3);
+}
+.btn--primary:hover {
+  background: var(--blue-dk);
+  box-shadow: 0 6px 20px rgba(81,146,194,.4);
+  transform: translateY(-1px);
+}
+
+/* Solo borde — acción secundaria */
+.btn--outline {
+  background: transparent;
+  color: var(--navy);
+  border: 1.5px solid var(--border);
+}
+.btn--outline:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   5. NAVBAR
+   Sticky en la parte superior.
+   Altura controlada por --nav-h en las variables.
+════════════════════════════════════════════════════════════ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  height: var(--nav-h);
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Contenedor interno del navbar */
+.nav__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Logo: imagen + texto */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font);
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: 20px;
+}
+.nav__logo strong {
+  font-weight: 800;
+  color: var(--blue);  /* "Build" en azul */
+}
+
+/* Imagen del logo SVG */
+.nav__logo-img {
+  height: 45px;
+  width: auto;
+  margin-right: 8px;
+}
+
+/* Links de navegación centrados */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+.nav__links a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color .15s, background .15s;
+}
+.nav__links a:hover {
+  color: var(--navy);
+  background: var(--off-white);
+}
+
+/* Botones CTA a la derecha */
+.nav__cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   6. HERO — Sección de bienvenida
+   Fondo navy oscuro, texto centrado, grande e impactante
+════════════════════════════════════════════════════════════ */
+.hero {
+  background: var(--navy);
+  padding: 80px 24px 100px;
+  text-align: center;
+}
+
+/* Contenedor centrado del hero */
+.hero__inner {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Título principal — el <em> lo pone azul */
+.hero__inner h1 {
+  font-size: clamp(32px, 4.5vw, 56px);  /* Responsive: mín 32px, máx 56px */
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -2px;
+}
+.hero__inner h1 em {
+  font-style: normal;
+  color: var(--blue);  /* Palabra destacada en azul */
+}
+
+/* Subtítulo */
+.hero__inner p {
+  font-size: 14px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* Contenedor de botones */
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+/* Botón outline en fondo oscuro — necesita colores especiales */
+.hero__actions .btn--outline {
+  color: rgba(255,255,255,.7);
+  border-color: rgba(255,255,255,.2);
+}
+.hero__actions .btn--outline:hover {
+  color: var(--white);
+  border-color: rgba(255,255,255,.5);
+  background: rgba(255,255,255,.06);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   7. FEATURES — Grid de tarjetas de servicios
+   3 columnas en desktop, 1 columna en mobile
+════════════════════════════════════════════════════════════ */
+.features {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+/* Encabezado centrado de sección — reutilizado en varias secciones */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-header .badge {
+  margin-bottom: 16px;
+}
+.section-header h2 {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.section-header p {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid de tarjetas: 3 columnas */
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ── Feature Card — base ── */
+.fcard {
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Variante span 2 columnas */
+.fcard--wide { grid-column: span 2; }
+
+/* Variantes de color */
+.fcard--navy  { background: var(--navy); color: var(--white); }
+.fcard--blue  { background: var(--blue); color: var(--white); }
+.fcard--teal  { background: #0f4c4a;    color: var(--white); }
+.fcard--light {
+  background: var(--white);
+  color: var(--text);
+  border: 1px solid var(--border);
+  /* Animación hover — levanta la tarjeta y agrega borde azul brillante */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.fcard--light:hover {
+  transform: translateY(-4px);
+  border-color: var(--blue);
+  box-shadow: 0 0 0 1px var(--blue), 0 8px 30px rgba(81,146,194,.2);
+}
+
+/* Label superior de la tarjeta (ej: "Versiones") */
+.fcard__label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  opacity: .5;
+}
+
+/* Título de la tarjeta */
+.fcard h3 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.fcard--light h3 { color: var(--navy); }
+
+/* Descripción de la tarjeta */
+.fcard p {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: .7;
+  margin-bottom: 16px;
+}
+.fcard--light p {
+  color: var(--muted);
+  opacity: 1;
+}
+
+/* Tags / chips de la tarjeta */
+.fcard__tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.fcard__tags span {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.7);
+}
+/* Tags en tarjetas claras */
+.fcard--light .fcard__tags span {
+  background: var(--blue-lt);
+  color: var(--blue-dk);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   8. ACCORDION SECTION — Funcionalidades con preview
+   Layout: 2 columnas (acordeón | imagen)
+   La imagen derecha cambia con TypeScript (src/main.ts)
+════════════════════════════════════════════════════════════ */
+.accordion-section {
+  padding: 100px 0;
+  background: var(--white);
+}
+
+/* Layout de 2 columnas */
+.accordion-section__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* Título de la columna izquierda */
+.accordion-left h2 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 40px;
+}
+
+/* ── Accordion Item (usa <details> y <summary> de HTML nativo) ── */
+.accordion-item {
+  border-top: 1px solid var(--border);
+  padding: 20px 0;
+}
+.accordion-item:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Título del ítem — clickeable */
+.accordion-item__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+  list-style: none;
+  gap: 16px;
+}
+/* Quita el triángulo nativo de <summary> */
+.accordion-item__title::-webkit-details-marker { display: none; }
+.accordion-item__title::marker { display: none; }
+
+.accordion-item__title:hover { color: var(--blue); }
+
+/* Flecha — TypeScript la cambia entre ↑ y ↓ */
+.accordion-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+details[open] .accordion-arrow {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-lt);
+}
+
+details[open] .accordion-arrow svg {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+/* Contenido expandible del ítem */
+.accordion-item__body {
+  padding-top: 14px;
+  animation: fadeIn 0.2s ease;
+}
+.accordion-item__body p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* Link "Conoce más →" */
+.accordion-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue);
+}
+.accordion-link:hover { text-decoration: underline; }
+
+/* Animación de entrada para el contenido */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Preview derecha — contenedor de la imagen ── */
+.accordion-preview {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  /* sticky: se queda visible al hacer scroll */
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+}
+
+/* Área donde TypeScript inyecta el <img> */
+.accordion-preview__body {
+  height: 340px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--off-white);
+}
+
+/* La imagen ocupa todo el contenedor */
+.accordion-preview__body img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+/* Animación cuando cambia la imagen */
+.preview-fade {
+  animation: fadeIn 0.3s ease;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   9. CTA SECTION — Llamada a la acción final
+   Caja navy con glow decorativo y botón centrado
+════════════════════════════════════════════════════════════ */
+.cta-section {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+.cta-box {
+  background: var(--navy);
+  border-radius: 24px;
+  padding: 72px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glow decorativo en la parte superior de la caja */
+.cta-box::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(81,146,194,.2) 0%, transparent 70%);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.cta-box .badge { margin-bottom: 20px; }
+
+.cta-box h2 {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.cta-box p {
+  font-size: 16px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 32px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   10. FOOTER
+   Grid de 4 columnas: brand + 3 listas de links
+════════════════════════════════════════════════════════════ */
+.footer {
+  background: var(--navy);
+  padding: 60px 0 32px;
+}
+
+/* Grid superior: brand (2fr) + 3 columnas (1fr cada una) */
+.footer__top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  margin-bottom: 28px;
+}
+
+/* Descripción de la marca */
+.footer__brand p {
+  font-size: 13px;
+  color: rgba(255,255,255,.35);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+/* Columna de links */
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer__col strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.35);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 4px;
+}
+.footer__col a {
+  font-size: 14px;
+  color: rgba(255,255,255,.5);
+  transition: color .15s;
+}
+.footer__col a:hover { color: var(--white); }
+
+/* Fila de copyright */
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,.25);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   11. RESPONSIVE — Media Queries
+   1024px: tablet landscape
+   768px:  tablet portrait / mobile grande
+   480px:  mobile pequeño
+════════════════════════════════════════════════════════════ */
+
+/* Tablet landscape */
+@media (max-width: 1024px) {
+  .features__grid { grid-template-columns: 1fr 1fr; }
+  .fcard--wide    { grid-column: span 2; }
+  .footer__top    { grid-template-columns: 1fr 1fr; }
+}
+
+/* Tablet / Mobile */
+@media (max-width: 768px) {
+  /* Navbar: oculta links y botón ghost en mobile */
+  .nav__links           { display: none; }
+  .nav__cta .btn--ghost { display: none; }
+
+  /* Features: 1 columna */
+  .features__grid { grid-template-columns: 1fr; }
+  .fcard--wide    { grid-column: span 1; }
+
+  /* Accordion: apila verticalmente */
+  .accordion-section__inner { grid-template-columns: 1fr; gap: 40px; }
+  .accordion-preview        { position: static; }
+
+  /* Hero: botones en columna */
+  .hero__actions { flex-direction: column; width: 100%; }
+  .btn--lg       { width: 100%; justify-content: center; }
+
+  /* Footer: 1 columna */
+  .footer__top    { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; }
+
+  /* CTA: menos padding */
+  .cta-box { padding: 48px 24px; }
+}
+
+/* Mobile pequeño */
+@media (max-width: 480px) {
+  .hero   { padding: 60px 20px 80px; }
+  .fcard  { padding: 24px; }
+}
