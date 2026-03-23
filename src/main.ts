@@ -1,37 +1,27 @@
 import '../style.css';
 
-// ── Preview content per accordion item ───────────────────
-const previews: Record<string, string> = {
-  viewer: `<img src="assets/images/previews/firstcard.png" alt="First Card" />`,
-  clash:  `<img src="assets/images/previews/secondcard.png"  alt="Second Card" />`,
-  issues: `<img src="assets/images/previews/thirdcard.png" alt="Third Card" />`,
-};
-// ── Accordion logic ───────────────────────────────────────
-const accordionItems = document.querySelectorAll<HTMLDetailsElement>('.accordion-item');
-const previewEl = document.getElementById('accordionPreview') as HTMLDivElement;
-
-function setPreview(key: string): void {
-  previewEl.innerHTML = previews[key] ?? '';
-  previewEl.classList.remove('preview-fade');
-  void previewEl.offsetWidth; // force reflow for animation restart
-  previewEl.classList.add('preview-fade');
-}
-
-accordionItems.forEach((item: HTMLDetailsElement) => {
-  const arrow = item.querySelector<HTMLSpanElement>('.accordion-arrow')!;
-
-  item.addEventListener('toggle', () => {
-  if (item.open) {
-    accordionItems.forEach((other) => {
-      if (other !== item) {
-        other.open = false;
+// ── Scroll-triggered fade-up animations ──────────────
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-up');
+        observer.unobserve(entry.target);
       }
     });
-    const key = item.dataset.preview ?? 'viewer';
-    setPreview(key);
-  }
-});
+  },
+  { threshold: 0.15 }
+);
+
+document.querySelectorAll<HTMLElement>('.scard, .bcard, .cta__box').forEach((el) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  observer.observe(el);
 });
 
-// Set initial preview
-setPreview('viewer');
+// ── Navbar scroll behavior ───────────────────────────
+const nav = document.querySelector<HTMLElement>('.nav')!;
+
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+});
